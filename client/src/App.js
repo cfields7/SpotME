@@ -7,6 +7,7 @@ import PhotoUploadScreen from './components/PhotoUploadScreen';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import MatchSelectionScreen from './components/MatchSelectionScreen';
+import Spot from './components/Spot';
 
 const API_BASE_URL = 'http://localhost:3001/api';
 
@@ -223,6 +224,7 @@ const App = () => {
         )}
       </div>
       <Footer />
+      <Spot currentScreen={currentScreen} />
     </div>
   );
 };
