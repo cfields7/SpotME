@@ -2,6 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const SearchResult = ({ image, result, mode, error, onBack, onRegister }) => {
+
+  const decodeImage = (base64String) => {
+    return `data:image/jpeg;base64,${base64String}`;
+  };
+  
   return (
     <motion.div 
       initial={{ opacity: 0, x: 300 }}
@@ -39,6 +44,11 @@ const SearchResult = ({ image, result, mode, error, onBack, onRegister }) => {
                     />
                   </div>
                 )}
+              <img
+                src={decodeImage(result.image)}
+                alt={`${result.firstName} ${result.lastName}`}
+                className="w-32 h-32 object-cover rounded-lg mx-auto mb-3"
+              />
               </div>
             <div className="grid grid-cols-2 gap-4">
 
