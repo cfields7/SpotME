@@ -9,7 +9,8 @@ import Footer from './components/Footer';
 import MatchSelectionScreen from './components/MatchSelectionScreen';
 import Spot from './components/Spot';
 
-const API_BASE_URL = 'https://spotme2.fly.dev/api';
+// const API_BASE_URL = 'https://spotme2.fly.dev/api';
+const API_BASE_URL = 'https://localhost:3001/api';
 
 const App = () => {
   const [currentScreen, setCurrentScreen] = useState('title');
