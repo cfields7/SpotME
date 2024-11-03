@@ -67,7 +67,7 @@ const Spot = ({ currentScreen }) => {
   return (
     <div className="fixed bottom-4 right-4 flex items-end gap-3">
       {/* Speech Bubble */}
-      <div className={`relative bottom-20 bg-white rounded-2xl p-4 max-w-xs shadow-lg transition-opacity duration-300 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
+      <div className={`relative bottom-20 left-20 bg-white rounded-2xl p-4 max-w-xs shadow-lg transition-opacity duration-300 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
         <div className="text-gray-800 mb-2 font-medium">
           {getCurrentTips()[currentTipIndex]}
         </div>
