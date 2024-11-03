@@ -4,6 +4,7 @@ import LoadingScreen from './components/LoadingScreen';
 import RegisterForm from './components/RegisterForm';
 import SearchResult from './components/SearchResult';
 import PhotoUploadScreen from './components/PhotoUploadScreen';
+import Footer from './components/Footer';
 
 const API_BASE_URL = 'http://localhost:3001/api';
 
@@ -166,7 +167,9 @@ const App = () => {
         )}
 
       </div>
+      <Footer />
     </div>
+
   );
 };
 
