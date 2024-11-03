@@ -114,6 +114,16 @@ const RegisterForm = ({ image, onSubmit, onCancel }) => {
             </div>
           </div>
           <div className="flex space-x-4">
+          <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="button"
+              onClick={onCancel}
+              className="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-lg font-semibold"
+            >
+              Cancel
+            </motion.button>
+
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -121,16 +131,6 @@ const RegisterForm = ({ image, onSubmit, onCancel }) => {
               className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-3 rounded-lg font-semibold"
             >
               Save Data
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="button"
-              onClick={onCancel}
-              className="flex-1 bg-gradient-to-r from-gray-500 to-gray-600 text-white px-4 py-3 rounded-lg font-semibold"
-            >
-              Cancel
             </motion.button>
           </div>
         </form>
