@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 const RegisterForm = ({ image, onSubmit, onCancel }) => {
  // Default form data values with empty strings
   const [formData, setFormData] = useState({
-    username: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -46,16 +45,6 @@ const RegisterForm = ({ image, onSubmit, onCancel }) => {
         )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            {/* User name will be removed later */}
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username}
-              onChange={handleChange}
-              className="p-3 bg-white/5 border border-gray-600 rounded-lg text-white col-span-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-              required
-            />
             <input
               type="text"
               name="firstName"

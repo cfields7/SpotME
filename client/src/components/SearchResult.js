@@ -1,8 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
 
-const SearchResult = ({ result, onBack, onRegister }) => {
+const SearchResult = ({ result, error, onBack, onRegister }) => {
   return (
     <motion.div 
       initial={{ opacity: 0, x: 300 }}
@@ -15,6 +14,34 @@ const SearchResult = ({ result, onBack, onRegister }) => {
           <div className="text-white">
             <h2 className="text-2xl font-bold mb-4">Match Found!</h2>
             {/* Display match results */}
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-gray-400 text-sm">Name</label>
+                  <p>{result.firstName} {result.lastName}</p>
+                </div>
+                <div>
+                  <label className="block text-gray-400 text-sm">Email</label>
+                  <p>{result.email}</p>
+                </div>
+                <div>
+                  <label className="block text-gray-400 text-sm">Phone</label>
+                  <p>{result.phone}</p>
+                </div>
+                {result.instagram && (
+                  <div>
+                    <label className="block text-gray-400 text-sm">Instagram</label>
+                    <p>{result.instagram}</p>
+                  </div>
+                )}
+                {result.snapchat && (
+                  <div>
+                    <label className="block text-gray-400 text-sm">Snapchat</label>
+                    <p>{result.snapchat}</p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         ) : (
           <div className="text-white text-center">
