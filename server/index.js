@@ -94,7 +94,6 @@ router.route('/users/search').post(async (req, res) => {
   console.log("matches:");
   console.log(matches);
 
-  let id = 1; // hardcode it for now though
   try {
     res.json(matches);
   } catch (error) {
