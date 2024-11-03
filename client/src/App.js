@@ -118,9 +118,6 @@ const App = () => {
     <div className="min-h-screen bg-gradient-to-b from-pink-700 via-red-600 to-red-900">
       <Header />
       <div className="container mx-auto px-10 py-8">
-
-
-        
         {/* The Screen System */}
         {currentScreen === 'title' && (
           <TitleScreen 
@@ -160,18 +157,15 @@ const App = () => {
             }}
           />
         )}
-
         {/* Show error at bottom of any active screen  */}
         {error && (
           <div className="max-w-2xl mx-auto mb-4 bg-yellow-500/30 border border-red-500 text-white p-4 rounded-lg">
             {error}
           </div>
         )}
-
       </div>
       <Footer />
     </div>
-
   );
 };
 
