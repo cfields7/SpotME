@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const faceapi = require("face-api.js");
+const fs = require('fs');
 const { Canvas, Image, ImageData } = require('canvas');
 faceapi.env.monkeyPatch({ Canvas, Image, ImageData });
 
@@ -107,13 +108,36 @@ async function isSamePerson(img1Base64, img2Base64) {
   const detection1 = await faceapi.detectSingleFace(img1Data).withFaceLandmarks().withFaceDescriptor();
   const detection2 = await faceapi.detectSingleFace(img2Data).withFaceLandmarks().withFaceDescriptor();
 
+  const detectionObject = JSON.stringify(detection1.descriptor);
+  const detectionFilename = 'user' + 1 +'-detection.json';
+  const detectionFilePath = './data/' + detectionFilename;
+  
+  fs.writeFile(detectionFilePath, detectionObject, (err) => {
+    if (err) {
+      console.error('Error writing detection object to file', err);
+    } else {
+      console.log('Detection object saved to ' + detectionFilePath);
+    }
+  });
+
   console.log("Made Detections");
 
   if (!detection1 || !detection2) {
     throw new Error("No faces detected in one of the images.");
   }
 
-  const distance = faceapi.euclideanDistance(detection1.descriptor, detection2.descriptor);
+  let newDetection1;
+
+  fs.readFile(detectionFilePath, "utf8", (err, data) => {
+    if (err) {
+      console.error('Error reading detection object from file', err);
+    } else {
+      newDetection1 = JSON.parse(data);
+      console.log('Detection object loaded from ' + detectionFilePath);
+    }
+  });
+
+  const distance = faceapi.euclideanDistance(newDetection1, detection2.descriptor);
   console.log("Distance:" + distance);
 
   // Recognize as same person if distance is less than threshold
