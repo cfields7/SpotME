@@ -22,7 +22,7 @@ const App = () => {
       const formData = new FormData();
       formData.append('image', imageFile);
 
-      const response = await fetch(`${API_BASE_URL}/search`, {
+      const response = await fetch(`${API_BASE_URL}/users/search`, {
         method: 'POST',
         body: formData,
       });
@@ -59,7 +59,7 @@ const App = () => {
       // Testing to see how this sends with the photo
       console.log(submitFormData);
 
-      const response = await fetch(`${API_BASE_URL}/register`, {
+      const response = await fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
         body: submitFormData,
       });
