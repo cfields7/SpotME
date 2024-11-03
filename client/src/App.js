@@ -168,6 +168,7 @@ const App = () => {
           <SearchResult 
             image={selectedImage}
             result={userData}
+            mode={mode}
             error={error}
             onBack={() => {
               setCurrentScreen('title');

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const SearchResult = ({ image, result, error, onBack, onRegister }) => {
+const SearchResult = ({ image, result, mode, error, onBack, onRegister }) => {
   return (
     <motion.div 
       initial={{ opacity: 0, x: 300 }}
@@ -12,7 +12,7 @@ const SearchResult = ({ image, result, error, onBack, onRegister }) => {
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
         {result ? (
           <div className="text-white">
-            <p className="flex justify-center items-center mt-0 mb-8 text-4xl font-rounded">Match Found!</p>
+            {mode==="search" && <p className="flex justify-center items-center mt-0 mb-8 text-4xl font-rounded">Match Found!</p>}
             {/* Display match results */}
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
