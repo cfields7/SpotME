@@ -14,7 +14,6 @@ const App = () => {
     snapchat: '',
   });
 
-
   // Update the form data everytime a user updates a box
   const handleDataChange = (e) => {
     setFormData({
