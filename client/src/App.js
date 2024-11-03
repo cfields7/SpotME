@@ -147,6 +147,7 @@ const App = () => {
         )}
         {currentScreen === 'result' && (
           <SearchResult 
+            image={selectedImage}
             result={userData}
             error={error}
             onBack={() => setCurrentScreen('title')}
