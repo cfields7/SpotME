@@ -9,6 +9,16 @@ const SearchResult = ({ image, result, mode, error, onBack, onRegister }) => {
       exit={{ opacity: 0, x: -300 }}
       className="max-w-2xl mx-auto"
     >
+
+    {/* Logo */}
+      <div className="flex justify-center items-center mt-0 mb-8">
+        <img 
+          src="/spotme.png" 
+          alt="SpotMe Logo" 
+          className="object-contain w-52 h-62 py-5"
+        />
+      </div>
+
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
         {result ? (
           <div className="text-white">
