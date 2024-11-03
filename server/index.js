@@ -45,7 +45,7 @@ router.route('/users').post(async (req, res) => {
     // Save user detection to file
     const detectionObject = JSON.stringify(detection);
     const detectionFilename = 'user' + userAdded.id +'-detection.json';
-    const detectionFilePath = './data/' + detectionFilename;
+    const detectionFilePath = '/data/' + detectionFilename;
     
     fs.writeFile(detectionFilePath, detectionObject, (err) => {
       if (err) {
