@@ -19,7 +19,7 @@ const SearchResult = ({ image, result, mode, error, onBack, onRegister }) => {
         />
       </div>
 
-      <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
+      <div className="bg-black/20 backdrop-blur-lg rounded-lg p-6">
         {result ? (
           <div className="text-white">
             {mode==="search" && <p className="flex justify-center items-center mt-0 mb-8 text-4xl font-rounded">Match Found!</p>}
