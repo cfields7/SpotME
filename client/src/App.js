@@ -95,7 +95,9 @@ const App = () => {
         throw new Error(data.error || 'Error registering face');
       }
 
-      setCurrentScreen('title');
+      setUserData(data);
+      setCurrentScreen('result');
+      setError("Success!");
     } catch (error) {
       console.error('Error in registerFace:', error);
       setError(error.message);
@@ -167,7 +169,10 @@ const App = () => {
             image={selectedImage}
             result={userData}
             error={error}
-            onBack={() => setCurrentScreen('title')}
+            onBack={() => {
+              setCurrentScreen('title');
+              setError("");
+            }}
             onRegister={() => {
               setMode('register');
               setCurrentScreen('register');
