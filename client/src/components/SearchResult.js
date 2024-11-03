@@ -22,7 +22,11 @@ const SearchResult = ({ image, result, mode, error, onBack, onRegister }) => {
       <div className="bg-black/20 backdrop-blur-lg justify-center items-center flexrounded-lg p-6">
       {result ? (
         <div className="text-white">
-          {mode==="search" && <p className="flex justify-center items-center mt-0 mb-8 text-4xl font-rounded">Match Found!</p>}
+          {mode==="search" && (
+        <p className="flex justify-center items-center mt-0 mb-8 text-4xl font-bold font-sans">
+          Match Found!
+            </p>
+          )}
           {/* Display match results */}
           <div className="space-y-4">
           <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 flex justify-center items-center">
