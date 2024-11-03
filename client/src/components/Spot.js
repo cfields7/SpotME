@@ -54,10 +54,10 @@ const Spot = ({ currentScreen }) => {
   const getCurrentTips = () => screenTips[currentScreen] || screenTips.title;
 
   const nextTip = () => {
-    setIsAnimating(true);
+    // setIsAnimating(true);
     const tips = getCurrentTips();
     setCurrentTipIndex((prev) => (prev + 1) % tips.length);
-    setTimeout(() => setIsAnimating(false), 300);
+    // setTimeout(() => setIsAnimating(false), 300);
   };
 
   useEffect(() => {
