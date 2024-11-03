@@ -19,46 +19,50 @@ const SearchResult = ({ image, result, mode, error, onBack, onRegister }) => {
         />
       </div>
 
-      <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
-        {result ? (
-          <div className="text-white">
-            {mode==="search" && <p className="flex justify-center items-center mt-0 mb-8 text-4xl font-rounded">Match Found!</p>}
-            {/* Display match results */}
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
-            {image && (
-                <div className="mb-6">
+      <div className="bg-black/20 backdrop-blur-lg justify-center items-center flexrounded-lg p-6">
+      {result ? (
+        <div className="text-white">
+          {mode==="search" && (
+        <p className="flex justify-center items-center mt-0 mb-8 text-4xl font-bold font-sans">
+          Match Found!
+            </p>
+          )}
+          {/* Display match results */}
+          <div className="space-y-4">
+          <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 flex justify-center items-center">
+                {image && (
+                  <div className="mb-6">
                     <img 
-                    src={URL.createObjectURL(image)} 
-                    alt="Upload Preview" 
-                    className="w-32 h-32 object-cover rounded-lg mx-auto"
+                      src={URL.createObjectURL(image)} 
+                      alt="Upload Preview" 
+                      className="w-32 h-32 object-cover rounded-lg mx-auto"
                     />
-                </div>
+                  </div>
                 )}
-                </div>
-                <br />
+              </div>
+            <div className="grid grid-cols-2 gap-4">
+
                 <div>
-                  <label className="block text-gray-400 text-sm">Name</label>
+                  <label className="block text-gray-100 text-sm">Name</label>
                   <p>{result.firstName} {result.lastName}</p>
                 </div>
                 <div>
-                  <label className="block text-gray-400 text-sm">Email</label>
+                  <label className="block text-gray-100 text-sm">Email</label>
                   <p>{result.email}</p>
                 </div>
                 <div>
-                  <label className="block text-gray-400 text-sm">Phone</label>
+                  <label className="block text-gray-100 text-sm">Phone</label>
                   <p>{result.phone}</p>
                 </div>
                 {result.instagram && (
                   <div>
-                    <label className="block text-gray-400 text-sm">Instagram</label>
+                    <label className="block text-gray-100 text-sm">Instagram</label>
                     <p>{result.instagram}</p>
                   </div>
                 )}
                 {result.snapchat && (
                   <div>
-                    <label className="block text-gray-400 text-sm">Snapchat</label>
+                    <label className="block text-gray-100 text-sm">Snapchat</label>
                     <p>{result.snapchat}</p>
                   </div>
                 )}
@@ -68,7 +72,7 @@ const SearchResult = ({ image, result, mode, error, onBack, onRegister }) => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-gradient-to-r from-gray-500 to-gray-600 text-white px-10 py-3 rounded-lg font-semibold"
+                className="bg-gradient-to-b from-red-500 to-red-900 text-white px-10 py-3 rounded-lg font-semibold"
                 onClick={onBack}
               >
                 Back

@@ -1,12 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const LoadingScreen = ({ image, onComplete }) => {
+  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   useEffect(() => {
     // Simulate processing time (will be real later)
     const timer = setTimeout(onComplete, 3000);
     return () => clearTimeout(timer);
   }, [onComplete]);
+
+  useEffect(() => {
+    if (image) {
+      const img = new Image();
+      img.src = URL.createObjectURL(image);
+      img.onload = () => {
+        setImageDimensions({
+          width: img.width,
+          height: img.height,
+        });
+      };
+    }
+  }, [image]);
+
+  const aspectRatio = imageDimensions.height / imageDimensions.width;
 
   return (
     <motion.div 
@@ -25,22 +41,47 @@ const LoadingScreen = ({ image, onComplete }) => {
       </div>
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-8 text-center">
         {image && (
-          <div className="relative mb-6 rounded-lg overflow-hidden">
+          <div 
+            className="relative mb-6 rounded-lg overflow-hidden"
+            style={{ 
+              paddingBottom: `${aspectRatio * 100}%`,
+              maxHeight: '400px'
+            }}
+          >
             {/* Preview of the image */}
             <img 
               src={URL.createObjectURL(image)} 
               alt="Upload Preview" 
-              className="w-full h-64 object-cover"
+              className="absolute top-0 left-0 w-full h-full object-contain"
             />
             {/* Moving bar as if scanning image */}
             <motion.div 
-              className="absolute top-0 left-0 w-full h-1 bg-blue-500"
+              className="absolute top-0 left-0 w-full h-full"
+              style={{
+                background: 'linear-gradient(transparent, rgba(59, 130, 246, 0.2), transparent)',
+                transform: 'rotate(-45deg)',
+              }}
               animate={{
-                y: ['0%', '6400%'],
-                opacity: [1, 0.5],
+                y: ['-100%', '200%'],
               }}
               transition={{
                 duration: 2,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+            {/* Additional rotating gradient for enhanced effect */}
+            <motion.div 
+              className="absolute top-0 left-0 w-full h-full"
+              style={{
+                background: 'linear-gradient(transparent, rgba(59, 130, 246, 0.1), transparent)',
+                transform: 'rotate(45deg)',
+              }}
+              animate={{
+                y: ['200%', '-100%'],
+              }}
+              transition={{
+                duration: 2.5,
                 repeat: Infinity,
                 ease: "linear"
               }}
