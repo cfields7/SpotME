@@ -4,7 +4,6 @@ const faceapi = require("face-api.js");
 const { Canvas, Image, ImageData } = require('canvas');
 faceapi.env.monkeyPatch({ Canvas, Image, ImageData });
 
-
 const app = express();
 const router = express.Router();
 const database = require('./database');
