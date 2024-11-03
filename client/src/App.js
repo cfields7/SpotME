@@ -1,6 +1,5 @@
 import './App.css';
 import { useState } from 'react';
-import { Search, UserPlus, User } from 'lucide-react';
 
 const App = () => {
   // Set the blank form data structure
