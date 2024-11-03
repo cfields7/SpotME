@@ -33,7 +33,7 @@ const App = () => {
       "bg-gradient-to-b from-purple-500 via-pink-500 to-red-500",
       "bg-gradient-to-b from-blue-200 via-blue-300 to-blue-400", 
       "bg-gradient-to-b from-rose-400 via-fuchsia-500 to-indigo-500", 
-      "bg-gradient-to-b from-lime-500 via-green-400 to-green-300",
+      "bg-gradient-to-b from-green-300 via-green-400 to-lime-500",
     ];
   
     const randomIndex = Math.floor(Math.random() * gradientClasses.length);

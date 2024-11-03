@@ -19,12 +19,12 @@ const Footer = () => {
             className="group"
             aria-label={label}
           >
-            <Icon className="w-20 h-8 text-gray-400 group-hover:text-white transition-colors" />
+            <Icon className="w-20 h-8 text-gray-200 group-hover:text-black transition-colors" />
           </a>
         ))}
       </div>
 
-        <p className="text-center text-gray-300">
+        <p className="text-center text-gray-200">
           Not © {new Date().getFullYear()}. Created by Fayaz and Christopher for HackNC on November 2nd 2024.
         </p>
       </div>
