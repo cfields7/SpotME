@@ -17,7 +17,24 @@ const App = () => {
   const [userData, setUserData] = useState(null);
   const [mode, setMode] = useState(null); // this can either be 'search' or 'register' depending on what they click
   const [error, setError] = useState(null);
+  const [backgroundClass, setBackgroundClass] = useState('');
 
+  useEffect(() => {
+    const gradientClasses = [
+      "bg-gradient-to-b from-green-700 via-yellow-600 to-orange-900",
+      "bg-gradient-to-b from-indigo-700 via-violet-600 to-gray-900",
+      "bg-gradient-to-b from-pink-700 via-red-600 to-red-900",
+      "bg-gradient-to-b from-teal-400 via-cyan-500 to-blue-600",  
+      "bg-gradient-to-b from-purple-500 via-pink-500 to-red-500",
+      "bg-gradient-to-b from-blue-200 via-blue-300 to-blue-400", 
+      "bg-gradient-to-b from-rose-400 via-fuchsia-500 to-indigo-500", 
+      "bg-gradient-to-b from-lime-500 via-green-400 to-green-300",
+    ];
+  
+    const randomIndex = Math.floor(Math.random() * gradientClasses.length);
+    setBackgroundClass(gradientClasses[randomIndex]);
+  }, []);
+  
 
    // Add effect to handle search when loading screen is shown
    useEffect(() => {
@@ -115,7 +132,7 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-700 via-red-600 to-red-900">
+    <div className={`min-h-screen ${backgroundClass}`}>
       <Header />
       <div className="container mx-auto px-10 py-8">
         {/* The Screen System */}
