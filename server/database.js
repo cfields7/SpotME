@@ -77,8 +77,25 @@ const getUser = (id) => {
   });
 };
 
+// Get a user by id
+const getAllUsers = () => {
+  console.log('Getting all users');
+  return new Promise((resolve, reject) => {
+    db.all('SELECT * FROM users', (err, users) => {
+      if (err) {
+        console.error('Error all users:', err);
+        reject(err);
+      } else {
+        console.log('Found users:', users);
+        resolve(users);
+      }
+    });
+  });
+};
+
 module.exports = {
   init,
   addUser,
-  getUser
+  getUser,
+  getAllUsers
 };
