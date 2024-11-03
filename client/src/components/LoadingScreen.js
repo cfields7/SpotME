@@ -15,6 +15,14 @@ const LoadingScreen = ({ image, onComplete }) => {
       exit={{ opacity: 0 }}
       className="max-w-2xl mx-auto"
     >   
+          {/* Logo */}
+          <div className="flex justify-center items-center mt-0 mb-8">
+        <img 
+          src="/spotme.png" 
+          alt="SpotMe Logo" 
+          className="object-contain w-52 h-62 py-5"
+        />
+      </div>
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-8 text-center">
         {image && (
           <div className="relative mb-6 rounded-lg overflow-hidden">
