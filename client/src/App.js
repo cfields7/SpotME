@@ -56,7 +56,7 @@ const App = () => {
       setError(null);
       setCurrentScreen('loading');
 
-      formData.image = "test";
+      formData.image = selectedImage2;
 
       console.log(JSON.stringify(formData));
 
