@@ -49,8 +49,8 @@ const PhotoUploadScreen = ({ onUpload, onUpload2, onCancel, mode }) => {
           onClick={() => fileInputRef.current?.click()}
         >
           <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-300 mb-2">Click to upload or drag and drop</p>
-          <p className="text-gray-400 text-sm">PNG, JPG up to 10MB</p>
+          <p className="text-gray-800 mb-2">Click to upload or drag and drop</p>
+          <p className="text-gray-900 text-sm">PNG, JPG up to 10MB</p>
           <input
             type="file"
             ref={fileInputRef}
