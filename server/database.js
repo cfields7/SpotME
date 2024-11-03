@@ -44,10 +44,10 @@ const init = () => {
 const addUser = (userData) => {
   console.log("Adding user with data ", userData);
   return new Promise((resolve, reject) => {
-    const { firstName, lastName, image, phone, instagram, snapchat, email } = userData;
+    const { firstName, lastName, image, email, phone, instagram, snapchat } = userData;
     db.run(
       "INSERT INTO users (firstName, lastName, image, email, phone, instagram, snapchat) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [firstName, lastName, image, phone, instagram, snapchat, email],
+      [firstName, lastName, image, email, phone, instagram, snapchat],
       function(err) {
         if (err) {
           console.error('Error inserting user:', err);
