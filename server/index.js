@@ -111,30 +111,31 @@ async function findMatches(imageSearched) {
 
   const users = await database.getAllUsers();
   console.log("got users");
+
   for (const user of users) {
     console.log("checking user");
     
-    // Get saved detection for user
-    const detectionFilename = 'user' + user.id +'-detection.json';
-    const detectionFilePath = './data/' + detectionFilename;
-    let userDetection;
-    fs.readFile(detectionFilePath, "utf8", async (err, data) => {
-      if (err) {
-        console.error('Error reading detection object from file', err);
-      } else {
-        userDetection = await JSON.parse(data);
-        console.log('Detection object loaded from ' + detectionFilePath);
+    try {
+      // Get saved detection for user using synchronous file read
+      const detectionFilename = 'user' + user.id + '-detection.json';
+      const detectionFilePath = './data/' + detectionFilename;
+      const fileData = fs.readFileSync(detectionFilePath, "utf8");
+      let userDetection = JSON.parse(fileData);
+      
+      // Convert descriptor object to array
+      const descriptorArray = new Float32Array(Object.values(userDetection.descriptor));
+      userDetection.descriptor = descriptorArray;
+      
+      console.log('Detection object loaded from ' + detectionFilePath);
+
+      const isSamePersonResult = await isSamePerson(searchedDetection, userDetection);
+      if (isSamePersonResult) {
+        console.log("adding a match");
+        matches.push(user);
       }
-    });
-
-    if (!userDetection) {
-      throw new Error("Error reading from detection file");
-    }
-
-    const isSamePersonResult = await isSamePerson(searchedDetection, userDetection);
-    if (isSamePersonResult) {
-      console.log("adding a match");
-      matches.push(user);
+    } catch (error) {
+      console.error(`Error processing user ${user.id}:`, error);
+      continue; // Skip this user and continue with the next one
     }
   }
   return matches;
@@ -145,7 +146,15 @@ async function isSamePerson(detection1, detection2) {
     throw new Error("No faces detected in one of the images.");
   }
 
-  const distance = faceapi.euclideanDistance(detection1.descriptor, detection2.descriptor);
+  if (!detection1.descriptor || !detection2.descriptor) {
+    throw new Error("Missing descriptor in one of the detections.");
+  }
+
+  // Ensure both descriptors are Float32Array
+  const descriptor1 = new Float32Array(Object.values(detection1.descriptor));
+  const descriptor2 = new Float32Array(Object.values(detection2.descriptor));
+
+  const distance = faceapi.euclideanDistance(descriptor1, descriptor2);
   console.log("Distance:" + distance);
 
   // Recognize as same person if distance is less than threshold
