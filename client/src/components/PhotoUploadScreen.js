@@ -28,6 +28,17 @@ const PhotoUploadScreen = ({ onUpload, onUpload2, onCancel, mode }) => {
       exit={{ opacity: 0 }}
       className="max-w-2xl mx-auto"
     >
+
+      {/* Logo */}
+      <div className="flex justify-center items-center mt-0 mb-8">
+        <img 
+          src="/spotme.png" 
+          alt="SpotMe Logo" 
+          className="object-contain w-52 h-62 py-5"
+        />
+      </div>
+
+
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-8">
         <h2 className="text-2xl font-bold text-white text-center mb-6">
           {mode === 'search' ? 'Upload Photo to Search' : 'Upload Photo to Register'}

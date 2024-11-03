@@ -33,6 +33,18 @@ const RegisterForm = ({ image, onSubmit, onCancel }) => {
       exit={{ opacity: 0, x: -300 }}
       className="max-w-2xl mx-auto"
     >
+
+    {/* Logo */}
+      <div className="flex justify-center items-center mt-0 mb-8">
+        <img 
+          src="/spotme.png" 
+          alt="SpotMe Logo" 
+          className="object-contain w-52 h-62 py-5"
+        />
+      </div>
+
+      <p className="flex justify-center items-center mt-0 mb-8 text-4xl font-rounded">Registration Form</p>
+
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
         {image && (
           <div className="mb-6">
@@ -106,10 +118,11 @@ const RegisterForm = ({ image, onSubmit, onCancel }) => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-3 rounded-lg font-semibold"
+              className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-3 rounded-lg font-semibold"
             >
               Save Data
             </motion.button>
+
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

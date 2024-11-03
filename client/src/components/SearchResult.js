@@ -12,7 +12,7 @@ const SearchResult = ({ image, result, error, onBack, onRegister }) => {
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
         {result ? (
           <div className="text-white">
-            <h2 className="text-2xl font-bold mb-4">Match Found!</h2>
+            <p className="flex justify-center items-center mt-0 mb-8 text-4xl font-rounded">Match Found!</p>
             {/* Display match results */}
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
@@ -52,6 +52,17 @@ const SearchResult = ({ image, result, error, onBack, onRegister }) => {
                     <p>{result.snapchat}</p>
                   </div>
                 )}
+              </div>
+              <br />
+              <div className="flex space-x-4 justify-center">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-gradient-to-r from-gray-500 to-gray-600 text-white px-10 py-3 rounded-lg font-semibold"
+                onClick={onBack}
+              >
+                Back
+              </motion.button>
               </div>
             </div>
           </div>
