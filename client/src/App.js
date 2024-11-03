@@ -46,11 +46,17 @@ const App = () => {
   const searchFace = async (imageFile) => {
     try {
       setError(null);
-      const formData = new FormData();
+      
+      const imageObject = {
+        image: selectedImage2
+      }
 
       const response = await fetch(`${API_BASE_URL}/users/search`, {
         method: 'POST',
-        body: selectedImage2,
+        headers: {
+          'Content-Type': 'application/json', 
+        },
+        body: JSON.stringify(imageObject),
       });
 
       console.log('Search response status:', response.status);

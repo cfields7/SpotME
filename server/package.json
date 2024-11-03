@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "canvas": "^2.11.2",
     "cors": "^2.8.5",
     "express": "^4.21.1",
+    "face-api.js": "^0.22.2",
     "nodemon": "^3.1.7",
     "sqlite3": "^5.1.7"
   }
