@@ -6,6 +6,7 @@ import SearchResult from './components/SearchResult';
 import PhotoUploadScreen from './components/PhotoUploadScreen';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import MatchSelectionScreen from './components/MatchSelectionScreen';
 
 const API_BASE_URL = 'http://localhost:3001/api';
 
@@ -18,6 +19,7 @@ const App = () => {
   const [mode, setMode] = useState(null); // this can either be 'search' or 'register' depending on what they click
   const [error, setError] = useState(null);
   const [backgroundClass, setBackgroundClass] = useState('');
+  const [matchResults, setMatchResults] = useState(null);
 
   useEffect(() => {
     const gradientClasses = [
@@ -67,13 +69,32 @@ const App = () => {
         throw new Error(data.error || 'Error searching face');
       }
 
-      setUserData(data);
-      setCurrentScreen('result');
+      // Handle array of results
+      if (Array.isArray(data)) {
+        if (data.length === 0) {
+          setUserData(null);
+          setCurrentScreen('result');
+        } else if (data.length === 1) {
+          setUserData(data[0]);
+          setCurrentScreen('result');
+        } else {
+          setMatchResults(data);
+          setCurrentScreen('match-selection');
+        }
+      } else {
+        setUserData(data);
+        setCurrentScreen('result');
+      }
     } catch (error) {
       console.error('Error in searchFace:', error);
       setError(error.message);
       setCurrentScreen('result');
     }
+  };
+
+  const handleMatchSelection = (selectedMatch) => {
+    setUserData(selectedMatch);
+    setCurrentScreen('result');
   };
 
   const registerFace = async (formData, imageFile) => {
@@ -170,6 +191,14 @@ const App = () => {
             onCancel={() => setCurrentScreen('title')}
           />
         )}
+        {currentScreen === 'match-selection' && (
+          <MatchSelectionScreen 
+            matches={matchResults}
+            onSelectMatch={handleMatchSelection}
+            onBack={() => setCurrentScreen('title')}
+          />
+        )}
+        
         {currentScreen === 'result' && (
           <SearchResult 
             image={selectedImage}
