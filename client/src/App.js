@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TitleScreen from './components/TitleScreen';
 import LoadingScreen from './components/LoadingScreen';
 import RegisterForm from './components/RegisterForm';
@@ -16,15 +16,22 @@ const App = () => {
   const [mode, setMode] = useState(null); // this can either be 'search' or 'register' depending on what they click
   const [error, setError] = useState(null);
 
+
+   // Add effect to handle search when loading screen is shown
+   useEffect(() => {
+    if (currentScreen === 'loading' && mode === 'search' && selectedImage2) {
+      searchFace();
+    }
+  }, [currentScreen, mode, selectedImage2]);
+
   const searchFace = async (imageFile) => {
     try {
       setError(null);
       const formData = new FormData();
-      formData.append('image', imageFile);
 
       const response = await fetch(`${API_BASE_URL}/users/search`, {
         method: 'POST',
-        body: formData,
+        body: selectedImage2,
       });
 
       console.log('Search response status:', response.status);
