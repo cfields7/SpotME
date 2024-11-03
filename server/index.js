@@ -8,7 +8,7 @@ const database = require('./database');
 const PORT = 3001;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "20mb" }));
 app.use('/api', router);
 
 // Initialize Database
@@ -18,8 +18,6 @@ database.init();
 
 // Add new user
 router.route('/users').post(async (req, res) => {
-  console.log("got this request");
-  console.log(req.body);
   try {
     const userAdded = await database.addUser(req.body);
     res.json(userAdded);
