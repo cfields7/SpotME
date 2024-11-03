@@ -45,7 +45,7 @@ router.route('/users').post(async (req, res) => {
     // Save user detection to file
     const detectionObject = JSON.stringify(detection);
     const detectionFilename = 'user' + userAdded.id +'-detection.json';
-    const detectionFilePath = './data/' + detectionFilename;
+    const detectionFilePath = '/data/' + detectionFilename;
     
     fs.writeFile(detectionFilePath, detectionObject, (err) => {
       if (err) {
@@ -118,7 +118,7 @@ async function findMatches(imageSearched) {
     try {
       // Get saved detection for user using synchronous file read
       const detectionFilename = 'user' + user.id + '-detection.json';
-      const detectionFilePath = './data/' + detectionFilename;
+      const detectionFilePath = '/data/' + detectionFilename;
       const fileData = fs.readFileSync(detectionFilePath, "utf8");
       let userDetection = JSON.parse(fileData);
       

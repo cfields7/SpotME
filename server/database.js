@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
-const DB_FILE = "./data/spotME-records.db";
+const DB_FILE = "/data/spotME-records.db";
 
 // Sqlite 3 Database
 let db;
