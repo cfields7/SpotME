@@ -56,19 +56,13 @@ const App = () => {
       setError(null);
       setCurrentScreen('loading');
 
-      const submitFormData = new FormData();
-      submitFormData.append('image', selectedImage2);
-      // Append all form fields to FormData
-      Object.keys(formData).forEach(key => {
-        submitFormData.append(key, formData[key]);
-      });
+      formData.image = "test";
 
-      // Testing to see how this sends with the photo
-      console.log(submitFormData);
+      console.log(JSON.stringify(formData));
 
       const response = await fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
-        body: submitFormData,
+        body: JSON.stringify(formData),
       });
 
       console.log('Submit response status:', response.status);
