@@ -4,6 +4,7 @@ import LoadingScreen from './components/LoadingScreen';
 import RegisterForm from './components/RegisterForm';
 import SearchResult from './components/SearchResult';
 import PhotoUploadScreen from './components/PhotoUploadScreen';
+import Header from './components/Header';
 import Footer from './components/Footer';
 
 const API_BASE_URL = 'http://localhost:3001/api';
@@ -115,6 +116,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-700 via-red-600 to-red-900">
+      <Header />
       <div className="container mx-auto px-10 py-8">
 
 
