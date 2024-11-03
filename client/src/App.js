@@ -1,4 +1,5 @@
 import './App.css';
+import { Search, UserPlus, User } from 'lucide-react';
 
 function App() {
   return (
