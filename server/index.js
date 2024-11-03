@@ -37,21 +37,24 @@ router.route('/users').post(async (req, res) => {
 
   const imgData = await loadImage(req.body.image);
   const detection = await faceapi.detectSingleFace(imgData).withFaceLandmarks().withFaceDescriptor();
-
-  const detectionObject = JSON.stringify(detection);
-  const detectionFilename = 'user' + 1 +'-detection.json';
-  const detectionFilePath = './data/' + detectionFilename;
-  
-  fs.writeFile(detectionFilePath, detectionObject, (err) => {
-    if (err) {
-      console.error('Error writing detection object to file', err);
-    } else {
-      console.log('Detection object saved to ' + detectionFilePath);
-    }
-  });
   
   try {
+    // Add user to database
     const userAdded = await database.addUser(req.body);
+
+    // Save user detection to file
+    const detectionObject = JSON.stringify(detection);
+    const detectionFilename = 'user' + userAdded.id +'-detection.json';
+    const detectionFilePath = './data/' + detectionFilename;
+    
+    fs.writeFile(detectionFilePath, detectionObject, (err) => {
+      if (err) {
+        console.error('Error writing detection object to file', err);
+      } else {
+        console.log('Detection object saved to ' + detectionFilePath);
+      }
+    });
+
     res.json(userAdded);
   } catch (error) {
     console.error('Error adding user:', error);
@@ -102,11 +105,34 @@ router.route('/users/search').post(async (req, res) => {
 
 async function findMatches(imageSearched) {
   let matches = [];
+
+  // Get detection for searched image
+  const imgData = await loadImage(imageSearched);
+  const searchedDetection = await faceapi.detectSingleFace(imgData).withFaceLandmarks().withFaceDescriptor();
+
   const users = await database.getAllUsers();
   console.log("got users");
   for (const user of users) {
     console.log("checking user");
-    const isSamePersonResult = await isSamePerson(imageSearched, user.image);
+    
+    // Get saved detection for user
+    const detectionFilename = 'user' + user.id +'-detection.json';
+    const detectionFilePath = './data/' + detectionFilename;
+    let userDetection;
+    fs.readFile(detectionFilePath, "utf8", async (err, data) => {
+      if (err) {
+        console.error('Error reading detection object from file', err);
+      } else {
+        userDetection = await JSON.parse(data);
+        console.log('Detection object loaded from ' + detectionFilePath);
+      }
+    });
+
+    if (!userDetection) {
+      throw new Error("Error reading from detection file");
+    }
+
+    const isSamePersonResult = await isSamePerson(searchedDetection, userDetection);
     if (isSamePersonResult) {
       console.log("adding a match");
       matches.push(user);
@@ -115,30 +141,7 @@ async function findMatches(imageSearched) {
   return matches;
 }
 
-async function isSamePerson(img1Base64, img2Base64) {
-  const img1Data = await loadImage(img1Base64);
-  // const img2Data = await loadImage(img2Base64);
-
-  console.log("Images Loaded");
-
-  const detection1 = await faceapi.detectSingleFace(img1Data).withFaceLandmarks().withFaceDescriptor();
-  // const detection2 = await faceapi.detectSingleFace(img2Data).withFaceLandmarks().withFaceDescriptor();
-
-  const detectionFilename = 'user' + 1 +'-detection.json';
-  const detectionFilePath = './data/' + detectionFilename;
-
-
-  fs.readFile(detectionFilePath, "utf8", (err, data) => {
-    if (err) {
-      console.error('Error reading detection object from file', err);
-    } else {
-      const detection2 = JSON.parse(data);
-      console.log('Detection object loaded from ' + detectionFilePath);
-    }
-  });
-
-  console.log("Made Detections");
-
+async function isSamePerson(detection1, detection2) {
   if (!detection1 || !detection2) {
     throw new Error("No faces detected in one of the images.");
   }
